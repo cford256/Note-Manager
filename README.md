@@ -1,5 +1,7 @@
 # Note Manager
 
+[Demo](https://cford256.github.io/Note-Manager/)
+
 Note Manager saves all of your data local in your browser. There is no server that it syncs your notes with.
 
 This application is intended to offer an alternative store notes on your computer. Whenever I think of something that I want to work on but don't currently have time to do so, I have the habit of simply writting down it down inside of Sticky Notes.
