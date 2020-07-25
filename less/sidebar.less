@@ -1,0 +1,126 @@
+// main: index.less
+
+// https://www.w3schools.com/howto/howto_js_sidenav.asp
+#sidebar{
+    height: calc(100% - 40px); 
+    width: 0px;
+    position: fixed;
+    z-index: 1; 
+    top: 40px; 
+    left: 0px;
+    background-color: @sidbar-bg; 
+    overflow-x: hidden; 
+    padding-top: 40px; 
+    transition: 0.3s; 
+    display: flex;
+    flex-direction: column;
+
+    hr{ width: 87%; }
+
+    .sidebar-item{
+        display: flex;
+        flex-direction: row;
+        padding: 8px 8px 8px 18px; 
+        text-decoration: none;
+        font-size: 25px;
+        color: #818181;
+        transition: 0.3s;
+
+        ion-icon{ 
+            align-self: center;
+            margin-right: 10px;
+        }
+
+        &:hover{ color: #f1f1f1; }
+    }
+
+    .sort-options-container{
+        display: flex; 
+        justify-content: space-between;
+        margin-left: 15px;
+        text-decoration: none;
+        font-size: 20px;
+        color: #818181;
+
+        .sort-container{
+            display: flex;
+            .sort-icon-container{
+                display: flex;
+                margin-left: 5px;
+                margin-right: 10px;
+                width: 35px;
+
+                .chronological-icon,
+                .alphabetical-icon,
+                .manual-sort-icon{
+                    align-self: center;
+                }
+
+                .alphabetical-icon{
+                    display: none;
+                    font-size: 15px;
+                    margin-left: 5px;
+                }
+
+                .manual-sort-icon{ display: none; }
+                &:hover{ color: #f1f1f1; }
+            }
+
+            &.sort-alphabetical{
+                .chronological-icon{ display: none; }
+                .alphabetical-icon{ display: block; }      
+            }
+
+            &.sort-manual{
+                .manual-sort-icon{ display: block; }
+                .chronological-icon{ display: none; }
+                .alphabetical-icon{ display: none; }
+            }
+        }
+    }
+
+    .item-container{
+        background: @greyish-color;
+        max-height: 70%;
+        height: 70%;
+        overflow-y: auto;
+        margin-left: 15px;
+        margin-right: 15px;
+        padding: 8px 8px 8px 18px; 
+        text-decoration: none;
+        color: #818181;
+        display: block;
+        transition: 0.3s;
+        .item-div{
+            display: flex;
+            padding: 0px 0px 8px 0px;
+            text-align: center;
+            .item-title{ 
+                font-size: 20px;
+                pointer-events: none;
+            }
+            ion-icon{
+                font-size: 20px;
+                align-self: center;
+                margin-right: 10px;
+                // pointer-events: none;
+                cursor: grab;
+            }
+            &:hover{ 
+                .item-title{  color: #f1f1f1; }
+                ion-icon{ color: #f1f1f1; }
+            }
+        }
+    }
+
+
+    // &.opened{ width: 250px; }
+
+    @media screen and (max-height: 450px){
+        #sidebar{
+            padding-top: 15px;
+            font-size: 18px;
+        }
+    } 
+
+  }

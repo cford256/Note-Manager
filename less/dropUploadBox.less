@@ -1,0 +1,112 @@
+// main: index.less
+
+// https://css-tricks.com/drag-and-drop-file-uploading/
+@dropbox-bg: #c8dadf;
+@dropbox-stich-color: #92b0b3;
+@dropbox-bg-darker: #4d7985;
+@dropbox-bg-lighter: #e3ecee;
+@dropbox-hover-color: #39bfd3;
+
+.dropbox-container{
+    width: 100%;
+    max-width: 680px; 
+    text-align: center;
+
+    .dropbox{
+        font-size: 1.25rem; 
+        background-color:  @dropbox-bg; 
+        position: relative;
+        padding: 100px 20px;
+        outline: 2px dashed  @dropbox-stich-color;
+        outline-offset: -10px;
+        -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
+        transition: outline-offset .15s ease-in-out, background-color .15s linear;
+
+        .dropbox__icon{
+            width: 100%;
+            height: 80px;
+            color: @dropbox-stich-color;
+            display: block;
+            margin-bottom: 40px;
+        }
+
+        .dropbox__uploading{ 
+            display: none;
+            font-style: italic;
+        }
+
+        .drop_box_file{
+            width: 0.1px;
+            height: 0.1px;
+            opacity: 0;
+            overflow: hidden;
+            position: absolute;
+            z-index: -1;
+
+            + label{
+                max-width: 80%;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                cursor: pointer;
+                display: inline-block;
+                overflow: hidden;
+            }
+
+            + label:hover strong,
+            &:focus + label strong{
+                color: @dropbox-hover-color;
+            }
+        }
+    }
+
+    &.is-dragover{
+        .dropbox{
+            background-color: @dropbox-bg-lighter; 
+        }
+    }
+
+    &.is-uploading{
+        .dropbox__input{ visibility: hidden; }
+        .dropbox__uploading{
+            display: block;
+            position: absolute;
+            top: 50%;
+            right: 0;
+            left: 0;
+            -webkit-transform: translateY( -50% );
+            transform: translateY( -50% );
+        }
+    }
+}
+
+
+
+// .full-page-drop{
+//     position: absolute;
+//     top: 0px;
+//     left:0px;
+//     z-index: 2000;
+//     width: 100%;
+//     height: 100%;
+//     max-width: 100%;
+//     display: none;
+//     .dropbox{
+//         max-height: 100%;
+//         height: 100%;
+//     }
+
+//     form{
+//         display: flex;
+//         align-items: center;
+//         justify-content: center;
+
+//         .dropbox__input{
+//             font-size: 2em;
+//             ion-icon[name="trash-bin-outline"]{
+//                 height: 4em;
+//             }
+//         }
+//     }
+
+ 
+// }

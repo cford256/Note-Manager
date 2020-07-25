@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <link rel="icon" type="image/png" href="favicon.png"/>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" type="text/css" href="libs/spin/spin.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule="" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js"></script>
+    <script src="libs/sweetAlert2/promisePolyfill.min.js"></script>
+    <script src="libs/sweetAlert2/sweetalert2.min.js"></script>
+    <script type="module" src="libs/spin/spin.umd.js"></script>   
+    <link href="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/css/suneditor.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/suneditor.min.js"></script>
+
+    <script src="libs/sortable.min.js"></script>
+    <script src="libs/tippy/popper.min.js"></script>
+    <script src="libs/tippy/tippy.umd.min.js"></script>
+    <script src="libs/pouchdb.min.js"></script>
+    <script src="js/pouchDBHelpers.js"></script>
+    <script src="libs/jszip.min.js"></script>
+    <script src="js/index.js"></script>
+    <title>Note Manager</title>
+  </head>
+
+  <body>
+    <div class="header">
+      <ion-icon name="grid-sharp" onclick="toggleSidebar()" class="toggle-sidebar"></ion-icon>
+      <div class="header-title">
+        <ion-icon class="" name="create-outline" ></ion-icon>
+        <h1 class="editable-title single-line" contentEditable="true" oninput="saveNewCalendarTitle(event);"><h1>
+      </div>
+      <div id="spinner"></div>
+      <ion-icon name="save-sharp"></ion-icon>
+    </div> 
+
+    <div id="sidebar" class="no-select"> 
+      <div class="sidebar-item " onclick="addNewNote();">
+        <ion-icon name="add-circle-outline"></ion-icon>
+        <div>Create New</div>
+      </div>
+
+      <div class="sort-options-container">
+        Notes
+        <div class="sort-container">
+          Sort:
+          <div class="sort-icon-container" onclick="toggleSidebarSort();">
+            <ion-icon class="chronological-icon" name="time-outline"></ion-icon>
+            <div class="alphabetical-icon">A-Z</div>
+            <ion-icon class="manual-sort-icon" name="reorder-four-outline"></ion-icon>
+          </div>
+        </div>
+        
+      </div>
+      <hr/>
+      <div id="item-container" class="item-container"></div>
+     
+      <div class="sidebar-item" onclick="showImportData();">
+        <ion-icon name="push-outline"></ion-icon>
+        <div>Import Data</div>
+      </div>
+ 
+      <div class="sidebar-item" onclick="exportDatabaseData();">
+        <ion-icon name="download-outline"></ion-icon>
+        <div>Export Data</div>
+      </div>
+
+      <div class="sidebar-item" onclick="deleteData();">
+        <ion-icon name="trash-bin-outline"></ion-icon>
+        <div>Delete Data</div>
+      </div>
+
+      <hr/>
+      <div class="sidebar-item" onclick="showAboutInforamtion();">
+        <ion-icon name="information-circle-outline"></ion-icon>
+        <div>About</div>
+      </div>
+    </div>
+
+
+
+    <div class="page-content">
+      <div class="editor-container">
+        <textarea id="sunEditor"></textarea>
+      </div>
+
+      <div class="bottom-toolbar">
+        <div class="delete-note" onclick="deleteNote();">
+          <ion-icon name="trash-bin-outline"></ion-icon>
+          <div>Delete This Note</div>
+        </div>
+      </div>
+   </div>
+
+  </body>
+
+  <!-- <div class="dropbox-container full-page-drop">
+    <form method="post" enctype="multipart/form-data" novalidate="" class="dropbox">
+      <div class="dropbox__input">
+        <ion-icon  class="dropbox__icon" name="push-outline"></ion-icon>
+        <input type="file" name="img-input" id="file" class="drop_box_file" onchange="importAsset(event);">
+        <label for="file"><strong>Choose a file</strong><span class="box__dragndrop"> or drag it here</span>.</label>
+      </div>
+      <div class="dropbox__uploading">Uploading…</div>
+    </form>
+  </div>  -->
+
+</html>
