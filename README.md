@@ -17,9 +17,8 @@ This application is intended to provide a bit more structure to taking notes. Th
  
 - [ ] Maybe add the option to encrypt notes. 
     - Providing a reason to learn some more libraries. 
+    - May use crypto pouch, and then not seperate the images to be an attachment.
 
-
-
-
+ - [ ] maybe save a notes content if you switch to another note in the sidebar.   
 
 Favicon is from: https://pixabay.com/illustrations/note-icon-symbol-sign-design-2389227/

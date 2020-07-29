@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function(){ // Main
     function loadNotes(){
         db = getDB(dbName);
         dbGetDoc(db, "Config", defaultConfig).then(function(response){ 
-            config = typeof response._rev == "undefined" ? response : response.docContent;
+            config = typeof response._rev === "undefined" ? response : response.docContent;
             config.sidebarOpened ? document.body.classList.add("sidebar-open") : document.body.classList.remove("sidebar-open");
             if(config.lastOpened != null){
                 openNote(config.lastOpened);
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function(){ // Main
         config.lastOpened = id;      
         saveConfig();
         currentId = id;  
-        if(typeof currentNote != "undefined" && id == currentNote.id){ // new note, since it is called from and new note.
+        if(typeof currentNote !== "undefined" && id == currentNote.id){ // new note, since it is called from and new note.
             changeHeaderTitle(currentNote.title);
             editor.setContents(currentNote.notes);
         }else{ // need to get the calendar from the database. 
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function(){ // Main
                 currentNote = res.docContent;
                 content = currentNote.notes;
                 var attachments = res._attachments;
-                if(typeof attachments != "undefined"){
+                if(typeof attachments !== "undefined"){
                     Object.keys(attachments).forEach(function(attName){
                         var base64 = attachments[attName].data;
                         var base64Image = "data:" + attachments[attName].content_type + ";base64," + base64;
@@ -106,11 +106,6 @@ document.addEventListener('DOMContentLoaded', function(){ // Main
         tippy(".chronological-icon", {content: 'Note\'s are in Chronological Order', placement: "right"});
         tippy(".alphabetical-icon", {content: 'Note\'s are in Alphabetical Order', placement: "right"});
         tippy(".manual-sort-icon", {content: 'Note\'s are are Sorted Manually', placement: "right"});
-    }
-
-    /**************************************************************************************/
-    function addSidebarNotesTooltips(){
-        tippy(".drag-cal", {content: 'Drag and Drop to Rearrange the Order', placement: "right"});     
     }
 
 //#endregion
@@ -190,7 +185,6 @@ document.addEventListener('DOMContentLoaded', function(){ // Main
                         saveConfig();
                     }
                 });
-                addSidebarNotesTooltips();
                 return {"ok": true};
             })
         )
@@ -373,7 +367,7 @@ document.addEventListener('DOMContentLoaded', function(){ // Main
         var el = document.querySelector(".editable-title");
         var range = document.createRange();
         var sel = window.getSelection();
-        if(typeof el.childNodes[0] != "undefined") range.setStart(el.childNodes[0], newPos);
+        if(typeof el.childNodes[0] !== "undefined") range.setStart(el.childNodes[0], newPos);
         range.collapse(true);
         sel.removeAllRanges();
         sel.addRange(range);
@@ -386,7 +380,7 @@ document.addEventListener('DOMContentLoaded', function(){ // Main
         var doc = element.ownerDocument || element.document;
         var win = doc.defaultView || doc.parentWindow;
         var sel;
-        if(typeof win.getSelection != "undefined"){
+        if(typeof win.getSelection !== "undefined"){
             sel = win.getSelection();
             if(sel.rangeCount > 0){
                 var range = win.getSelection().getRangeAt(0);
@@ -519,7 +513,7 @@ document.addEventListener('DOMContentLoaded', function(){ // Main
     function addDragAndDrop(){
         var elem = document.body; //  document.querySelector(".dropbox");
         addMultipleEvents(elem,  ["drag", "dragstart", "dragend", "dragover", "dragenter", "dragleave", "drop"], function(e){
-            if(!(typeof e.target != "undefined" && typeof e.target.classList != "undefined" && e.target.classList.contains("item-div"))){
+            if(!(typeof e.target !== "undefined" && typeof e.target.classList !== "undefined" && e.target.classList.contains("item-div"))){
                 e.preventDefault();
                 e.stopPropagation();
             }
@@ -604,7 +598,7 @@ document.addEventListener('DOMContentLoaded', function(){ // Main
                     if(type == "base64"){
                         for(var j = 0; j < docs.length; j++){ // Find the doc that the attachment belongs to. 
                             if(docs[j]._id == docName){
-                                if(typeof docs[j]._attachments == "undefined") docs[j]._attachments = {};
+                                if(typeof docs[j]._attachments === "undefined") docs[j]._attachments = {};
                                 docs[j]._attachments[fileName] = {
                                     "content_type": guessImageMime(data),
                                     "data": data
@@ -621,7 +615,7 @@ document.addEventListener('DOMContentLoaded', function(){ // Main
                 }).then(function(){
                     return dbGetDoc(db, "Config", defaultConfig)
                 }).then(function(response){
-                    config = typeof response._rev == "undefined" ? response : response.docContent;
+                    config = typeof response._rev === "undefined" ? response : response.docContent;
                     config.sidebarOpened ? document.body.classList.add("sidebar-open") : document.body.classList.remove("sidebar-open");
                     openNote(config.lastOpened);
                     return loadNotesIntoSidebar(); 
@@ -634,7 +628,7 @@ document.addEventListener('DOMContentLoaded', function(){ // Main
 
     /**************************************************************************************/
     function sunEditorClosed(){
-        return typeof editor == "undefined" || typeof editor.core == "undefined";
+        return typeof editor === "undefined" || typeof editor.core === "undefined";
     }
 
     /**************************************************************************************/

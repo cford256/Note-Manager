@@ -57,7 +57,7 @@ function dbDelete(db){
 function dbGetAllDocs(db, options){
     showSpinner();
     var opt = {};
-    if(typeof options != "undefined") opt = options;
+    if(typeof options !== "undefined") opt = options;
     return Promise.resolve(
         db.allDocs(opt).then(function(result){
             result.rows.forEach(function(row){               
@@ -87,9 +87,9 @@ function dbLogAllDocs(db){
 /**************************************************************************************/
 function dbGetAllPrefixedDocs(db, prefix, incDocs, incAtt, attAsBlob){
     var options = { startkey: prefix, endkey: prefix + "\ufff0" };
-    if(typeof incDocs != "undefined") options.include_docs = incDocs;
-    if(typeof incAtt != "undefined") options.attachments = incAtt;
-    if(typeof attAsBlob != "undefined") options.binary = attAsBlob;
+    if(typeof incDocs !== "undefined") options.include_docs = incDocs;
+    if(typeof incAtt !== "undefined") options.attachments = incAtt;
+    if(typeof attAsBlob !== "undefined") options.binary = attAsBlob;
     return Promise.resolve(
         dbGetAllDocs(db, options)
     );
@@ -99,8 +99,8 @@ function dbGetAllPrefixedDocs(db, prefix, incDocs, incAtt, attAsBlob){
 function dbPutDoc(db, id, content){
     showSave();
     var putData = { _id: id, docContent: content };
-    if(typeof dbRevisions[id] != "undefined") putData._rev = dbRevisions[id];
-    if(typeof dbAttachments[id] != "undefined") putData._attachments = dbAttachments[id];    
+    if(typeof dbRevisions[id] !== "undefined") putData._rev = dbRevisions[id];
+    if(typeof dbAttachments[id] !== "undefined") putData._attachments = dbAttachments[id];    
     return Promise.resolve(
         db.put(putData).then(function(result){
             if(result.ok) dbRevisions[result.id] = result.rev;
@@ -131,15 +131,15 @@ function dbEnsureDocUpdate(db, id, content){
 function dbGetDoc(db, id, defaultDoc, att, attAsBlob){  
     showSpinner();
     var options = {};
-    if(typeof att != "undefined") options.attachments = att; // Include attachment data.
-    if(typeof attAsBlob != "undefined") options.binary = attAsBlob; // Return attachment data as Blobs/Buffers, instead of as base64-encoded strings.
+    if(typeof att !== "undefined") options.attachments = att; // Include attachment data.
+    if(typeof attAsBlob !== "undefined") options.binary = attAsBlob; // Return attachment data as Blobs/Buffers, instead of as base64-encoded strings.
     return Promise.resolve(
         db.get(id, options).then(function(doc){
             dbRevisions[doc._id] = doc._rev;
             dbAttachments[doc._id] = doc._attachments;
             return doc;
         }).catch(function(e){ // If defaultDoc is provided, it will return that if the doc does not exist.
-            if(e.name === 'not_found' && typeof defaultDoc != "undefined") return JSON.parse(JSON.stringify(defaultDoc));
+            if(e.name === 'not_found' && typeof defaultDoc !== "undefined") return JSON.parse(JSON.stringify(defaultDoc));
             console.error("dbGetDoc: \t" + e);
             return {error: true}
         }).finally(function(){
@@ -203,7 +203,7 @@ function dbBulkPutAttachments(db, id, attachmentsArray, removeAnyOtherAttachment
 function dbPutAttachment(db, docId, attachmentName, data, mimeType){
     showSave();
     var rev = ""; // Not using the spread operator since I am not outruling supporting IE11.
-    if(typeof dbRevisions[docId] != "undefined") rev = dbRevisions[docId];
+    if(typeof dbRevisions[docId] !== "undefined") rev = dbRevisions[docId];
 
     if(rev != ""){ 
         return Promise.resolve(
